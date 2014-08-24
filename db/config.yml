@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: roster_development
+
+test:
+  adapter: postgresql
+  database: roster_test
