@@ -56,7 +56,18 @@ def main_menu
 end
 
 def add_team
+  puts "\nWhat team would you like to add?\n"
+  user_team = gets.chomp
+  new_team = Team.create({name: user_team})
+  puts "#{new_team.name} has been created.\n"
+end
 
+def view_teams
+  puts "Here are the existing teams:"
+  puts "[id] ----- [Name]"
+  puts "-----------------------------"
+  Team.all.each {|team| puts "#{team.id} -- #{team.name}" }
+  puts "\n"
 end
 
 main_menu
