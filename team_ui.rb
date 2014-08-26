@@ -22,12 +22,12 @@ def main_menu
     puts "{--Players--}"
     puts "[3] - Add Player"
     puts "[4] - View Players"
-    puts "[5] - Delete Player"
+    puts "[5] - View Starting Players"
     puts "\n"
 
     puts "{--Other--}"
     puts "[6] - Add Position"
-    puts "[7] - View Starting Players"
+    puts "[7] - View a Roster"
     puts "\n"
 
     puts "[x] - Exit"
@@ -41,11 +41,11 @@ def main_menu
     elsif menu_choice == '4'
       view_players
     elsif menu_choice == '5'
-      delete_player
+      view_starters
     elsif menu_choice == '6'
       add_position
     elsif menu_choice == '7'
-      view_starters
+      view_roster
     elsif menu_choice == 'x'
       puts "See you later, alligator."
       exit
@@ -106,11 +106,23 @@ def view_players
   puts "\n"
 end
 
+def view_roster
+  view_teams
+  puts ""
+end
+
 def add_position
   puts "\nEnter the new position name: "
   pos_input = gets.chomp
   new_position = Position.create({:title => pos_input})
   puts "\n'#{new_position.title}' position has been created."
+  puts "\n"
+end
+
+def view_starters
+  puts "Players who start for their team listed below:"
+  puts "[Team #] -- Name ---- (Position ID)"
+  Player.find_starters.each { |starter| puts "[#{starter.team_id}] ----- #{starter.name} - (#{starter.position_id})" }
   puts "\n"
 end
 
