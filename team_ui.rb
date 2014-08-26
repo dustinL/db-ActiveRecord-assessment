@@ -70,4 +70,8 @@ def view_teams
   puts "\n"
 end
 
+def add_player
+
+end
+
 main_menu
