@@ -108,7 +108,11 @@ end
 
 def view_roster
   view_teams
-  puts ""
+  puts "\nSelect a team by ID to view their roster: "
+  team_choice = gets.chomp.to_i
+  team_roster = Roster.find_by "team_id = ?", team_choice
+  binding.pry
+  puts team_roster
 end
 
 def add_position

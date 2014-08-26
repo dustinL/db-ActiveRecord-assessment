@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Player do
   it { should belong_to :team }
   it { should belong_to :position }
-  it { should have_one :roster }
 
   describe '.find_starters' do
     it 'should return all players with a depth_rank of 1' do
