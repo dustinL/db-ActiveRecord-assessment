@@ -47,7 +47,7 @@ def main_menu
     elsif menu_choice == '7'
       delete_position
     elsif menu_choice == 'x'
-      puts "Later, alligator."
+      puts "See you later, alligator."
       exit
     else
       puts "Please input a valid entry."
@@ -94,7 +94,16 @@ def add_player
   puts "\n"
   new_player = Player.create({:name => player_name, :team_id => team_choice, :position_id => position_input, :depth_rank => depth_ranking})
   sleep(1)
-  puts "#{new_player.name} has been created!\n"
+  puts "#{new_player.name} has been created!"
+  puts "\n"
+end
+
+def add_position
+  puts "\nEnter the new position name: "
+  pos_input = gets.chomp
+  new_position = Position.create({:title => pos_input})
+  puts "\n'#{new_position.title}' position has been created."
+  puts "\n"
 end
 
 main_menu
