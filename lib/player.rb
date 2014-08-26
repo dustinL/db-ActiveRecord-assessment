@@ -4,6 +4,7 @@ class Player < ActiveRecord::Base
   has_one :roster
 
   validates :name, :presence => true, :length => { :maximum => 20}
+  validates :depth_rank, :presence => true, numericality: { only_integer: true }
 
   scope :find_starters, -> { where(:depth_rank => 1) }
 
