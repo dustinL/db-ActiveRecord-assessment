@@ -25,9 +25,9 @@ def main_menu
     puts "[5] - Delete Player"
     puts "\n"
 
-    puts "{--Positions--}"
+    puts "{--Other--}"
     puts "[6] - Add Position"
-    puts "[7] - Delete Position"
+    puts "[7] - View Starting Players"
     puts "\n"
 
     puts "[x] - Exit"
@@ -45,7 +45,7 @@ def main_menu
     elsif menu_choice == '6'
       add_position
     elsif menu_choice == '7'
-      delete_position
+      view_starters
     elsif menu_choice == 'x'
       puts "See you later, alligator."
       exit
@@ -64,9 +64,9 @@ end
 
 def view_teams
   puts "Here are the existing teams:"
-  puts "[id] --- [Name]"
+  puts "[id] --- Name"
   puts "-----------------------------"
-  Team.all.each {|team| puts "#{team.id} - #{team.name}" }
+  Team.all.each {|team| puts "[#{team.id}] - #{team.name}" }
   puts "\n"
 end
 
@@ -95,6 +95,14 @@ def add_player
   new_player = Player.create({:name => player_name, :team_id => team_choice, :position_id => position_input, :depth_rank => depth_ranking})
   sleep(1)
   puts "#{new_player.name} has been created!"
+  puts "\n"
+end
+
+def view_players
+  puts "All current players:"
+  puts "[Team #] -- Name ---- (Position ID)"
+  puts "---------------------------------------"
+  Player.all.each {|player| puts "[#{player.team_id}] ----- #{player.name} - (#{player.position_id})" }
   puts "\n"
 end
 
