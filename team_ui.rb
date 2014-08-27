@@ -2,7 +2,6 @@ require 'active_record'
 require './lib/team'
 require './lib/player'
 require './lib/position'
-require './lib/roster'
 
 require 'pry'
 
@@ -16,7 +15,7 @@ def main_menu
   loop do
     puts "***Team Almanac***\n"
     puts "[1] - Add Team"
-    puts "[2] - View Teams\n"
+    puts "[2] - View Teams"
     puts "\n"
 
     puts "{--Players--}"
@@ -25,7 +24,6 @@ def main_menu
     puts "[5] - View Starting Players"
     puts "\n"
 
-    puts "{--Other--}"
     puts "[6] - Add Position"
     puts "[7] - View a Roster"
     puts "\n"
@@ -59,7 +57,8 @@ def add_team
   puts "\nWhat team would you like to add?\n"
   user_team = gets.chomp
   new_team = Team.create({name: user_team})
-  puts "#{new_team.name} has been created.\n"
+  puts "#{new_team.name} has been created."
+  puts "\n"
 end
 
 def view_teams
@@ -110,9 +109,15 @@ def view_roster
   view_teams
   puts "\nSelect a team by ID to view their roster: "
   team_choice = gets.chomp.to_i
-  team_roster = Roster.find_by "team_id = ?", team_choice
-  binding.pry
-  puts team_roster
+  team_roster = Team.find(team_choice)
+  system("clear")
+  puts "#{team_roster.name}"
+  puts "Player - Depth Chart Rank - Position ID"
+  puts "----------------------------------------"
+  team_roster.players.each do |player|
+    puts "#{player.name} - #{player.depth_rank} - #{player.position_id}"
+  end
+    puts "\n"
 end
 
 def add_position
